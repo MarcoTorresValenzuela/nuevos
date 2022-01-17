@@ -15,7 +15,7 @@ import zipfile
 import imgaug
 
 # Root directory of the project
-ROOT_DIR = os.path.abspath("/content/Mask_RCNN")
+ROOT_DIR = os.path.abspath("/content/mask_rcnn_colab")
 print("VERS 0.2")
 # Import Mask RCNN
 sys.path.append(ROOT_DIR)  # To find local version of the library
