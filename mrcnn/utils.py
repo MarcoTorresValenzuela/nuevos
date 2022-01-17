@@ -23,9 +23,10 @@ import shutil
 import warnings
 from distutils.version import LooseVersion
 
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-import tensorflow.python.util.deprecation as deprecation
+from tensorflow.python.util import deprecation
 deprecation._PRINT_DEPRECATION_WARNINGS = False
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
 
 # URL from which to download the latest COCO trained weights
 COCO_MODEL_URL = "https://github.com/matterport/Mask_RCNN/releases/download/v2.0/mask_rcnn_coco.h5"
