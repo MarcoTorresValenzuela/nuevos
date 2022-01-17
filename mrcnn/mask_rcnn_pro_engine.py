@@ -4,8 +4,7 @@ import random
 import math
 import re
 import time
-import warnings
-warnings.filterwarnings('ignore')
+
 
 import numpy as np
 import cv2
@@ -306,8 +305,7 @@ imgaug_aug = imgaug.augmenters.Sometimes(5/6,imgaug.augmenters.OneOf(
 def train_head(model, dataset_train, dataset_val, config, epochs, enable_aug=False):
     global imgaug_aug
     augmentation = imgaug_aug if enable_aug is True else None
-    print("Augmentation")
-    print(augmentation)
+
     model.train(dataset_train, dataset_val,
             learning_rate=config.LEARNING_RATE,
             epochs=epochs,
