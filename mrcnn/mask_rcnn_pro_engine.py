@@ -22,7 +22,7 @@ tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 
 # Root directory of the project
 ROOT_DIR = os.path.abspath("/content/mask_rcnn_colab")
-print("VERS 0.2")
+print("VERS 0.3 - 17/01/2022")
 # Import Mask RCNN
 sys.path.append(ROOT_DIR)  # To find local version of the library
 from mrcnn.config import Config
