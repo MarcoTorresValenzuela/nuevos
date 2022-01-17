@@ -230,7 +230,7 @@ class CustomDataset(utils.Dataset):
 MODEL_DIR = os.path.join(ROOT_DIR, "logs")
 
 def load_training_model(config, project_name, init_with="coco"):
-    model_dir = os.path.join(DRIVE_ROOT_DIR, project_name)
+    model_dir = os.path.join(DRIVE_ROOT_DIR, project_name, "logs")
     model = modellib.MaskRCNN(mode="training", config=config,
                               model_dir=model_dir)
 
