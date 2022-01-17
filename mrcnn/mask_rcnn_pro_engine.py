@@ -377,7 +377,7 @@ def test_random_image(test_model, dataset_val, inference_config):
 # Connect google drive
 def connect_google_drive(project_name):
     from google.colab import drive
-    drive.mount('/content/gdrive')
+    drive._mount('/content/gdrive')
 
     model_dir = os.path.join(DRIVE_ROOT_DIR, project_name)
     if not os.path.exists(model_dir):
