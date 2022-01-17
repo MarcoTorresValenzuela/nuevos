@@ -227,10 +227,10 @@ class CustomDataset(utils.Dataset):
         return class_number, n_images
 
 # Directory to save logs and trained model
-MODEL_DIR = os.path.join(ROOT_DIR, "logs")
+MODEL_DIR = os.path.join(ROOT_DIR, "trained_models")
 
 def load_training_model(config, project_name, init_with="coco"):
-    model_dir = os.path.join(DRIVE_ROOT_DIR, project_name, "logs")
+    model_dir = os.path.join(DRIVE_ROOT_DIR, project_name, "trained_models")
     model = modellib.MaskRCNN(mode="training", config=config,
                               model_dir=model_dir)
 
@@ -444,7 +444,7 @@ def model_evaluation(dataset_val, test_model, inference_config):
 
 def path_to_tb_path(project_name):
     """ This functions adds \\ to the path otherwise tensorboard doesn't recognize it"""
-    logs_path = os.path.join(DRIVE_ROOT_DIR, project_name, "logs")
+    logs_path = os.path.join(DRIVE_ROOT_DIR, project_name, "trained_models")
     path = os.path.normpath(logs_path)
     path_split = path.split(os.sep)
 
