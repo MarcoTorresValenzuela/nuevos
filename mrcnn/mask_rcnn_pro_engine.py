@@ -4,6 +4,9 @@ import random
 import math
 import re
 import time
+import warnings
+warnings.filterwarnings('ignore')
+
 import numpy as np
 import cv2
 import matplotlib
@@ -27,8 +30,6 @@ from mrcnn import visualize
 from mrcnn.model import log
 from PIL import Image, ImageDraw
 
-import warnings
-warnings.filterwarnings('ignore')
 
 
 DRIVE_ROOT_DIR = "/content/gdrive/MyDrive/pysource_mrcnn_pro/"
