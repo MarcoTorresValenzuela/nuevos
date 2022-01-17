@@ -269,40 +269,40 @@ def load_image_dataset(annotation_path, dataset_path, dataset_type):
 # layers. You can also pass a regular expression to select
 # which layers to train by name pattern.
 
+imgaug_aug = imgaug.augmenters.Sometimes(5/6,imgaug.augmenters.OneOf(
+                                            [
+                                            imgaug.augmenters.Fliplr(1),
+                                            imgaug.augmenters.Flipud(1),
+                                            imgaug.augmenters.Affine(rotate=(-45, 45)),
+                                            imgaug.augmenters.Affine(rotate=(-90, 90)),
+                                            imgaug.augmenters.Affine(scale=(0.5, 1.5))
+                                             ]
+                                        )
+                                   )
 
 
-def train_head(model, dataset_train, dataset_val, config, epochs):
+def train_head(model, dataset_train, dataset_val, config, epochs, enable_aug=False):
+    global imgaug_aug
+    augmentation = imgaug_aug if enable_aug is True else None
+    print("Augmentation")
+    print(augmentation)
     model.train(dataset_train, dataset_val,
             learning_rate=config.LEARNING_RATE,
             epochs=epochs,
             layers='heads',
-            augmentation=imgaug.augmenters.Sometimes(5/6,imgaug.augmenters.OneOf(
-                                            [
-                                            imgaug.augmenters.Fliplr(1), 
-                                            imgaug.augmenters.Flipud(1), 
-                                            imgaug.augmenters.Affine(rotate=(-45, 45)), 
-                                            imgaug.augmenters.Affine(rotate=(-90, 90)), 
-                                            imgaug.augmenters.Affine(scale=(0.5, 1.5))
-                                             ]
-                                        )
-                                   ))
+            augmentation=augmentation)
 
 
-def train_all_layers(model, dataset_train, dataset_val, config, epochs):
+def train_all_layers(model, dataset_train, dataset_val, config, epochs, enable_aug=False):
+    global imgaug_aug
+    augmentation = imgaug_aug if enable_aug is True else None
+    print("Augmentation")
+    print(augmentation)
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE / 10,
                 epochs=epochs,
                 layers="all",
-                augmentation=imgaug.augmenters.Sometimes(5/6,imgaug.augmenters.OneOf(
-                                            [
-                                            imgaug.augmenters.Fliplr(1), 
-                                            imgaug.augmenters.Flipud(1), 
-                                            imgaug.augmenters.Affine(rotate=(-45, 45)), 
-                                            imgaug.augmenters.Affine(rotate=(-90, 90)), 
-                                            imgaug.augmenters.Affine(scale=(0.5, 1.5))
-                                             ]
-                                        )
-                                   ))
+                augmentation=augmentation)
 
 
 """ DETECTION TEST YOUR MODEL """
