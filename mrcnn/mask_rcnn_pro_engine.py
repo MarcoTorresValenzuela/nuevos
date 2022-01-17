@@ -440,3 +440,16 @@ def model_evaluation(dataset_val, test_model, inference_config):
                              r["rois"], r["class_ids"], r["scores"], r['masks'])
         APs.append(AP)
     return APs
+
+
+def path_to_tb_path(project_name):
+    """ This functions adds \\ to the path otherwise tensorboard doesn't recognize it"""
+    logs_path = os.path.join(DRIVE_ROOT_DIR, project_name, "logs")
+    path = os.path.normpath(logs_path)
+    path_split = path.split(os.sep)
+
+    final_path = ""
+    for folder in path_split:
+        final_path += folder
+        final_path += r"\\"
+    return final_path
