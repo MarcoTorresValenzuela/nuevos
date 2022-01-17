@@ -13,6 +13,7 @@ import os
 import shutil
 import zipfile
 import imgaug
+import glob
 
 # Root directory of the project
 ROOT_DIR = os.path.abspath("/content/mask_rcnn_colab")
@@ -257,11 +258,30 @@ def display_image_samples(dataset_train):
         mask, class_ids = dataset_train.load_mask(image_id)
         visualize.display_top_masks(image, mask, class_ids, dataset_train.class_names)
 
-def load_image_dataset(annotation_path, dataset_path, dataset_type):
+def load_image_dataset(project_name):
+    project_dir = os.path.join(DRIVE_ROOT_DIR, project_name)
     dataset_train = CustomDataset()
-    dataset_train.load_custom(annotation_path, dataset_path, dataset_type)
+    dataset_val = CustomDataset()
+    print("Annotation path", project_dir)
+    # Find all Json annotations
+    annotation_path = os.path.join(project_dir, "*.json")
+    annotations_files_path = glob.glob(annotation_path)
+
+    print("Found {} annotation files".format(len(annotations_files_path)))
+    for file_path in annotations_files_path:
+        dataset_train.load_custom(file_path, "/content/dataset", dataset_type='train')
+        dataset_val.load_custom(file_path, "/content/dataset", dataset_type='val')
+
     dataset_train.prepare()
-    return dataset_train
+    dataset_val.prepare()
+
+    class_number, n_images = dataset_train.count_classes()
+    print("{} train images".format(n_images))
+    _, n_images = dataset_val.count_classes()
+    print("{} validation images".format(n_images))
+    print("{} classes".format(class_number))
+
+    return dataset_train, dataset_val, class_number
 
 
 # Train the head branches
