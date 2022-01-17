@@ -17,9 +17,8 @@ import zipfile
 import imgaug
 import glob
 
-from tensorflow.python.util import deprecation
-deprecation._PRINT_DEPRECATION_WARNINGS = False
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+import tensorflow as tf
+tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 
 # Root directory of the project
 ROOT_DIR = os.path.abspath("/content/mask_rcnn_colab")
