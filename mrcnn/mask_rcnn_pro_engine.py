@@ -115,7 +115,7 @@ class CustomDataset(utils.Dataset):
         """
 
         # Load json from file
-        print("Annotation json path: ", annotation_json)
+        #print("Annotation json path: ", annotation_json)
         json_file = open(annotation_json)
         coco_json = json.load(json_file)
         json_file.close()
@@ -211,16 +211,17 @@ class CustomDataset(utils.Dataset):
 
     def count_classes(self):
         class_ids = set()
+        n_images = 0
         for image_id in self.image_ids:
             image_info = self.image_info[image_id]
             annotations = image_info['annotations']
-
+            n_images += 1
             for annotation in annotations:
                 class_id = annotation['category_id']
                 class_ids.add(class_id)
 
         class_number = len(class_ids)
-        return class_number
+        return class_number, n_images
 
 # Directory to save logs and trained model
 MODEL_DIR = os.path.join(ROOT_DIR, "logs")
