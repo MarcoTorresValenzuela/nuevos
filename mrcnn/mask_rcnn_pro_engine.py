@@ -451,5 +451,5 @@ def path_to_tb_path(project_name):
     final_path = ""
     for folder in path_split:
         final_path += folder
-        final_path += r"\\"
+        final_path += r"/"
     return final_path
